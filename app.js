@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require('express');
 const bodyParser = require("body-parser");
+const spawn = require('cross-spawn');
 
 const app = express();
 
@@ -26,7 +27,18 @@ app.post("/", function(req, res){
   const key = process.env.KEY;
 
   res.render("map", {key: key, start: start, end: end});
-})
+});
+
+app.get("/testMap", function(req,res){
+  const pythonProcess = spawn("python3", ["test.py"]);
+  pythonProcess.stdout.on("data", function(data){
+    mystr = data.toString();
+    myjson = JSON.parse(mystr);
+
+    console.log("ok");
+    console.log(myjson);
+  });
+});
 
 app.listen(3000, function(){
   console.log("Server is up and running");
