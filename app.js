@@ -1,20 +1,13 @@
 require("dotenv").config();
 const express = require('express');
 const bodyParser = require("body-parser");
-const spawn = require('cross-spawn');
+var spawn = require("child_process").spawn;
 
 const app = express();
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
-
-app.set("view engine", "ejs");
-app.use(express.static("public"));
-
-//const url = "https://api.mapbox.com/directions/v5/mapbox/driving/"
-// start = '-122.42,37.78'
-// end = '-122.434924,37.794240'
 
 
 app.get("/", function(req, res){
@@ -30,13 +23,14 @@ app.post("/", function(req, res){
 });
 
 app.get("/testMap", function(req,res){
-  const pythonProcess = spawn("python3", ["test.py"]);
-  pythonProcess.stdout.on("data", function(data){
+  const pythonProcess = spawn("python",["test.py"]);
+  pythonProcess.stdout.on('data', function(data){
     mystr = data.toString();
     myjson = JSON.parse(mystr);
 
-    console.log("ok");
     console.log(myjson);
+
+    res.render("map", {key: process.env.KEY, start: myjson.Start, end: myjson.End});
   });
 });
 
