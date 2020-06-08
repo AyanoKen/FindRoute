@@ -35,6 +35,9 @@
     var end = (document.getElementById('myend').dataset.end).split(",");  //Change the destination position here
     var route;
 
+    start = start.reverse();
+    end = end.reverse();
+
     var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v10',
