@@ -18,21 +18,37 @@ app.post("/", function(req, res){
   const start = req.body.startpos;
   const end = req.body.endpos;
   const key = process.env.KEY;
+  var distance;
+  var time;
 
-  res.render("map", {key: key, start: start, end: end});
-});
-
-app.get("/testMap", function(req,res){
-  const pythonProcess = spawn("python",["test.py"]);
-  pythonProcess.stdout.on('data', function(data){
+  const pythonProcess = spawn("python", ["distanceTimeCal.py", start, end, key]);
+  pythonProcess.stdout.on("data", function(data){
     mystr = data.toString();
     myjson = JSON.parse(mystr);
 
-    console.log(myjson);
+    console.log(myjson.distance);
+    console.log(myjson.time);
 
-    res.render("map", {key: process.env.KEY, start: myjson.Start, end: myjson.End});
+    distance = myjson.distance;
+    time = myjson.time;
+
+    res.render("map", {key: key, start: start, end: end, distance:distance, time:time});
   });
+
+
 });
+
+// app.get("/testMap", function(req,res){
+//   const pythonProcess = spawn("python",["test.py"]);
+//   pythonProcess.stdout.on('data', function(data){
+//     mystr = data.toString();
+//     myjson = JSON.parse(mystr);
+//
+//     console.log(myjson);
+//
+//     res.render("map", {key: process.env.KEY, start: myjson.Start, end: myjson.End});
+//   });
+// });
 
 let port = process.env.PORT;
 if (port == null || port == "") {
