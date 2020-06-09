@@ -16,4 +16,4 @@ file and type KEY=youraccesskeyfrommapboxwebsite in the file.
 4.Now open a command line and cd to the project folder and use the command "npm install" .
 This command downloads all the required node dependencies to your project folder
 
-5.Now to run the program, use the command "node app.js" and open your browser and go to https://localhost:3000
+5.Now to run the program, use the command "node app.js" and open your browser and go to http://localhost:3000
