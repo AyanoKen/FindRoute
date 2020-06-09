@@ -29,8 +29,8 @@ app.post("/", function(req, res){
     console.log(myjson.distance);
     console.log(myjson.time);
 
-    distance = myjson.distance/1000;
-    time = myjson.time/60;
+    distance = (myjson.distance/1000).toFixed(2);
+    time = (myjson.time/60).toFixed(2);
 
     res.render("map", {key: key, start: start, end: end, distance:distance, time:time});
   });
