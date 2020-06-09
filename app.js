@@ -21,7 +21,7 @@ app.post("/", function(req, res){
   var distance;
   var time;
 
-  const pythonProcess = spawn("python", ["distanceTimeCal.py", start, end, key]);
+  const pythonProcess = spawn("python", ["./pythonFiles/distanceTimeCal.py", start, end, key]);
   pythonProcess.stdout.on("data", function(data){
     mystr = data.toString();
     myjson = JSON.parse(mystr);
@@ -29,8 +29,8 @@ app.post("/", function(req, res){
     console.log(myjson.distance);
     console.log(myjson.time);
 
-    distance = myjson.distance;
-    time = myjson.time;
+    distance = myjson.distance/1000;
+    time = myjson.time/60;
 
     res.render("map", {key: key, start: start, end: end, distance:distance, time:time});
   });
@@ -38,7 +38,7 @@ app.post("/", function(req, res){
 
 });
 
-// app.get("/testMap", function(req,res){
+// app.get("./pythonFiles/testMap", function(req,res){
 //   const pythonProcess = spawn("python",["test.py"]);
 //   pythonProcess.stdout.on('data', function(data){
 //     mystr = data.toString();

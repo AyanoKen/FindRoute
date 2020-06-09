@@ -7,28 +7,12 @@
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-    }
-
-    #map {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 100%;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <div class="container">
-    <h1>Distance is <%=distance%> and Time is <%=time%></h1>
-  </div>
-  <div class="container">
-    <div id='map'></div>
-  </div>
+  <div id='map' class="mapboxgl-map"></div>
+  <div id="details">Distance is <%=distance%> Km and estimated travel time is <%=time%> minutes</div>
 
 	<div id="mykey" data-key=<%= key %>></div>
 	<div id="mystart" data-start=<%= start %>></div>
