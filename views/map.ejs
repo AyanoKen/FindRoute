@@ -12,7 +12,11 @@
 
 <body>
   <div id='map' class="mapboxgl-map"></div>
-  <div id="details">Distance is <%=distance%> Km and estimated travel time is <%=time%> minutes</div>
+
+  <div class="details">
+    <p>Distance is <%=distance%> Km</p>
+    <p>Estimated travel time is <%=time%> minutes</p>
+  </div>
 
 	<div id="mykey" data-key=<%= key %>></div>
 	<div id="mystart" data-start=<%= start %>></div>
